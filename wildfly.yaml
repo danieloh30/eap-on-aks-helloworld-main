@@ -1,0 +1,7 @@
+apiVersion: wildfly.org/v1alpha1
+kind: WildFlyServer
+metadata:
+  name: eap-on-aks-helloworld
+spec:
+  applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.1'
+  replicas: 2
