@@ -47,7 +47,7 @@ spec:
 applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.2'
 replicas: 2
 ```
-
+ 
  * Verify the EAP server -  2 min
 
 ```
