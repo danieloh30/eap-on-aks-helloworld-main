@@ -44,7 +44,7 @@ kind: WildFlyServer
 metadata:
 name: quickstart
 spec:
-applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.1'
+applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.2'
 replicas: 2
 ```
 
