@@ -48,6 +48,12 @@ applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.2'
 replicas: 2
 ```
 
+ * Create the wildfly CR.
+
+ ```
+ kubectl apply -f wildfly.yaml
+ ```
+ 
  * Verify the EAP server -  2 min
 
 ```
