@@ -44,7 +44,7 @@ kind: WildFlyServer
 metadata:
 name: quickstart
 spec:
-applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.2'
+applicationImage: 'quay.io/danieloh30/eap-on-aks-helloworld-main:1.3'
 replicas: 2
 ```
 
@@ -53,7 +53,7 @@ replicas: 2
  ```
  kubectl apply -f wildfly.yaml
  ```
- 
+
  * Verify the EAP server -  2 min
 
 ```
@@ -64,13 +64,14 @@ kubectl logs eap-on-aks-helloworld-0
 
 ```
 ...
-21:24:25,029 INFO  [org.jboss.weld.Bootstrap] (Weld Thread Pool -- 1) WELD-000119: Not generating any bean definitions from org.jboss.helloworld.RestApplication because of underlying class loading error: Type Failed to link org.jboss.helloworld.RestApplication (Module "deployment.helloworld-eap.war" from Service Module Loader): javax.ws.rs.core.Application not found.  If this is unexpected, enable DEBUG logging to see the full error.
-21:24:25,605 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 79) WFLYUT0021: Registered web context: '/helloworld-eap' for server 'default-server'
-21:24:25,721 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 45) WFLYSRV0010: Deployed "helloworld-eap.war" (runtime-name : "helloworld-eap.war")
-21:24:25,803 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0212: Resuming server
-21:24:25,809 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://0.0.0.0:9990/management
-21:24:25,810 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://0.0.0.0:9990
-21:24:25,811 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 28.0.1.Final (WildFly Core 20.0.2.Final) started in 8433ms - Started 389 of 609 services (321 services are lazy, passive or on-demand) - Server configuration file in use: standalone.xml
+04:23:31,111 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 75) WFLYCLINF0002: Started http-remoting-connector cache from ejb container
+04:23:32,192 INFO  [org.jboss.resteasy.resteasy_jaxrs.i18n] (ServerService Thread Pool -- 76) RESTEASY002225: Deploying javax.ws.rs.core.Application: class org.jboss.helloworld.RestApplication$Proxy$_$$_WeldClientProxy
+04:23:32,280 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 76) WFLYUT0021: Registered web context: '/helloworld-eap' for server 'default-server'
+04:23:32,545 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 42) WFLYSRV0010: Deployed "helloworld-eap.war" (runtime-name : "helloworld-eap.war")
+04:23:32,667 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0212: Resuming server
+04:23:32,673 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: JBoss EAP 7.4.11.GA (WildFly Core 15.0.26.Final-redhat-00001) started in 16988ms - Started 521 of 808 services (515 services are lazy, passive or on-demand)
+04:23:32,676 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://0.0.0.0:9990/management
+04:23:32,676 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0054: Admin console is not enabled
 ```
 
  * Edit the service to access by an external client - 2 min
@@ -101,3 +102,11 @@ eap-on-aks-helloworld-loadbalancer   LoadBalancer   10.0.127.131   20.10.225.209
 Once a new tab in your web browser, access the `EXTERNAL-IP/helloworld-ear`. For example, 20.10.225.209/helloworld-ear.
 
 ![Topology view](src/main/webapp/assets/img/eap-aks-landing.png)
+
+## Appendix
+
+How to change the current namespace in Kubernetes.
+
+```
+kubectl config set-context --current --namespace=eap-aks
+```
